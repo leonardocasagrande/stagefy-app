@@ -8,12 +8,14 @@ import {
 
 import Home from './pages/Home';
 import ChatRoom from './pages/ChatRoom';
+import Introduction from './pages/Introduction';
 
 export type RootStackPagesList = {
   Home: undefined;
   ChatRoom: {
     username: string;
   };
+  Introduction: undefined;
 };
 
 export const useRootStackNavigation: () => NativeStackNavigationProp<
@@ -38,6 +40,7 @@ const AppNavigationContainer: React.FC = () => {
     <NavigationContainer>
       <RootStackNavigator screenOptions={defaultRootStackScreenOptions}>
         <RootStackGroup>
+          <RootStackScreen name="Introduction" component={Introduction} />
           <RootStackScreen name="Home" component={Home} />
           <RootStackScreen name="ChatRoom" component={ChatRoom} />
         </RootStackGroup>

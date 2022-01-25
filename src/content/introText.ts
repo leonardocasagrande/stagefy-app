@@ -1,0 +1,5 @@
+const introText = `A Stagefy é um aplicativo que visa tornar o bilinguismo acessível através de experiências artísticas e culturais ao vivo e gamificadas. 
+Com ele é possível assistir aulas, lives com conteúdo bilíngue e shows (teatro, música, games e outros). Para interagir com os streamers (transmissores) ao vivo, você pode enviar e receber bonificações (figurinhas animadas) para aprender, praticar e subir de nível! Nesta fase de desenvolvimento do aplicativo queremos te convidar a fazer um teste. Lembrando que as telas que você irá acessar a seguir são exemplos de como será o app. Esta é uma simulaçã estática e nem todos os botões estão funcionais ainda. Explore livremente e depois nos conte suas impressões para nos ajudar a desenvolver a versão final deste app. Com a stagefy sua experiência de aprendizado bilíngue com entretenimento será mais interativa e gamificada! 
+Agradecemos por sua contribuição e por nos ajudar a construir este app. Esperamos que goste!`;
+
+export default introText;
