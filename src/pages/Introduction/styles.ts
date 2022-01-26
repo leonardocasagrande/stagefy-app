@@ -30,5 +30,6 @@ export const styles = StyleSheet.create({
   buttonWrapper: {
     maxWidth: 204,
     alignSelf: 'center',
+    width: '100%',
   },
 });
