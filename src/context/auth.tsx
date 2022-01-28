@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { Axios } from '../config/axios';
 import sessionsService from '../services/sessions';
-import { IUser } from '../types';
+import { IUser, ProfileRoleEnum } from '../types';
 
 interface IAuthContextProps {
   children: ReactNode;
@@ -29,10 +29,10 @@ interface IAuthContextData {
   user: IUser;
   token: string;
   refreshToken: string;
-  signIn(credentials: SigninCredentials): Promise<void>;
+  signIn(credentials: SigninCredentials): Promise<ProfileRoleEnum>;
   signOut(): Promise<void>;
   clearAuth(): void;
-  loadAuth(): Promise<void>;
+  loadAuth(): Promise<ProfileRoleEnum>;
 }
 
 export const AuthContext = createContext({} as IAuthContextData);
@@ -51,6 +51,7 @@ export const AuthProvider: React.FC<IAuthContextProps> = ({ children }) => {
     Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 
     setAuthData({ token, user, refreshToken });
+    return user.profileRole;
   }, []);
 
   const signOut = useCallback(async () => {
@@ -76,6 +77,7 @@ export const AuthProvider: React.FC<IAuthContextProps> = ({ children }) => {
     await AsyncStorage.setItem('@stagefy:refresh_token', refreshToken);
     Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     setAuthData({ token, user, refreshToken });
+    return user.profileRole;
   }, []);
 
   const loadAuth = async () => {
@@ -83,7 +85,7 @@ export const AuthProvider: React.FC<IAuthContextProps> = ({ children }) => {
     if (!refreshToken) {
       throw new Error('Refresh token inexistente');
     }
-    await refreshUserToken(refreshToken);
+    return await refreshUserToken(refreshToken);
   };
 
   return (

@@ -21,6 +21,7 @@ const colors = {
   successMain: '#4CAF62',
   successLight: '#7fe290',
   successDark: '#0b7f36',
+  brandWhite: '#F2F2F2',
 };
 
 export default colors;

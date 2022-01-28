@@ -4,7 +4,6 @@ import { Button } from 'react-native-elements';
 import StyledModal, { IStyledModalProps } from '../StyledModal';
 import error from '../../assets/images/error.png';
 import styles from './styles';
-interface IErrorModalProps extends IStyledModalProps {}
 
 const ErrorModal = (props: IStyledModalProps) => {
   return (

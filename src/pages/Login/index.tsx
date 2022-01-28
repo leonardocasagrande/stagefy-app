@@ -13,6 +13,8 @@ import loginSchema from '../../schemas/login';
 import textStyles from '../../theme/textStyles';
 import styles from './styles';
 import axios from 'axios';
+import { ProfileRoleEnum } from '../../types/index.d';
+import { useLoading } from '../../context/loading';
 
 const Login: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -23,25 +25,36 @@ const Login: React.FC = () => {
 
   const { setError } = useError();
 
+  const { setLoading } = useLoading();
+
   const { handleChange, handleBlur, errors, touched, handleSubmit } = useFormik(
     {
       initialValues: loginSchema.getDefault(),
       validationSchema: loginSchema,
       onSubmit: async formValues => {
+        setLoading(true);
         try {
-          await signIn({
+          const role = await signIn({
             email: formValues.email,
             password: formValues.password,
           });
-          reset({
-            index: 0,
-            routes: [{ name: 'Home' }],
-          });
+          if (role === ProfileRoleEnum.Professional) {
+            reset({
+              index: 0,
+              routes: [{ name: 'StreamerHome' }],
+            });
+          } else {
+            reset({
+              index: 0,
+              routes: [{ name: 'Home' }],
+            });
+          }
         } catch (err) {
           if (axios.isAxiosError(err)) {
             setError(err.response?.data.message);
           }
         }
+        setLoading(false);
       },
     },
   );

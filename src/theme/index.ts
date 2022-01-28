@@ -14,7 +14,12 @@ const theme: Theme = {
     buttonStyle: {
       borderRadius: 5,
     },
-    titleProps: {},
+    disabledTitleStyle: {
+      color: colors.brandWhite,
+    },
+    disabledStyle: {
+      backgroundColor: colors.disabled,
+    },
     titleStyle: textStyles.button,
   },
   CheckBox: {

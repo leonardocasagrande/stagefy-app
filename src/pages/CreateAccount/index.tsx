@@ -16,6 +16,7 @@ import styles from './styles';
 import axios from 'axios';
 import { useError } from '../../context/error';
 import { useSuccess } from '../../context/success';
+import { useLoading } from '../../context/loading';
 
 const CreateAccount: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -23,6 +24,7 @@ const CreateAccount: React.FC = () => {
   const { signIn } = useAuth();
   const { setError } = useError();
   const { setSuccess } = useSuccess();
+  const { setLoading } = useLoading();
 
   const { navigate, reset } = useRootStackNavigation();
 
@@ -38,6 +40,7 @@ const CreateAccount: React.FC = () => {
     initialValues: userSchema.getDefault(),
     validationSchema: userSchema,
     onSubmit: async formValues => {
+      setLoading(true);
       try {
         await userService.createUser({
           email: formValues.email,
@@ -58,6 +61,7 @@ const CreateAccount: React.FC = () => {
           setError(err.response?.data.message);
         }
       }
+      setLoading(false);
     },
   });
 

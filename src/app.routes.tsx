@@ -12,6 +12,8 @@ import Introduction from './pages/Introduction';
 import AppBuilder from './pages/AppBuilder';
 import Login from './pages/Login';
 import CreateAccount from './pages/CreateAccount';
+import StreamerHome from './pages/StreamerHome';
+import StreamerSchedule from './pages/StreamerSchedule';
 
 export type RootStackPagesList = {
   Home: undefined;
@@ -22,6 +24,8 @@ export type RootStackPagesList = {
   AppBuilder: undefined;
   Login: undefined;
   CreateAccount: undefined;
+  StreamerHome: undefined;
+  StreamerSchedule: undefined;
 };
 
 export const useRootStackNavigation: () => NativeStackNavigationProp<
@@ -50,6 +54,11 @@ const AppNavigationContainer: React.FC = () => {
           <RootStackScreen name="Introduction" component={Introduction} />
           <RootStackScreen name="Login" component={Login} />
           <RootStackScreen name="CreateAccount" component={CreateAccount} />
+          <RootStackScreen name="StreamerHome" component={StreamerHome} />
+          <RootStackScreen
+            name="StreamerSchedule"
+            component={StreamerSchedule}
+          />
           <RootStackScreen name="Home" component={Home} />
           <RootStackScreen name="ChatRoom" component={ChatRoom} />
         </RootStackGroup>

@@ -10,6 +10,20 @@ const textStyles = StyleSheet.create({
     letterSpacing: 0.727273,
     textTransform: 'uppercase',
   },
+  title: {
+    fontFamily: 'BalooBhaijaan2-Bold',
+    fontSize: 18,
+    lineHeight: 31,
+    letterSpacing: 0.73,
+    color: colors.secondaryMain,
+  },
+  homeButton: {
+    fontFamily: 'BalooBhaijaan-SemiBold',
+    fontSize: 12,
+    lineHeight: 21,
+    letterSpacing: 0.73,
+    color: colors.textMain,
+  },
   header1: {
     fontFamily: 'BalooBhaijaan-Regular',
     color: colors.textMain,
@@ -87,6 +101,14 @@ const textStyles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 21,
     fontFamily: 'BalooBhaijaan2-Regular',
+  },
+  navigateText: {
+    color: colors.textMain,
+    fontFamily: 'BalooBhaijaan2-Medium',
+    fontSize: 18,
+    lineHeight: 31,
+    letterSpacing: 0.73,
+    textTransform: 'uppercase',
   },
 });
 
