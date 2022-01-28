@@ -33,3 +33,7 @@ export interface IEvent {
   name: string;
   views: number;
 }
+
+export interface IStartedEvent extends IEvent {
+  channelName: string;
+}
