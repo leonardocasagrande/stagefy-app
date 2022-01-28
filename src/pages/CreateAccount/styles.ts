@@ -6,20 +6,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     paddingVertical: 48,
     backgroundColor: colors.primaryBg,
-    flex: 1,
   },
   image: {
     alignSelf: 'center',
   },
   form: {
     marginTop: 48,
-    flex: 1,
+  },
+  privacy: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   title: {
     marginBottom: 36,
   },
   button: {
-    marginTop: 'auto',
+    marginTop: 16,
     width: 160,
     alignSelf: 'center',
   },

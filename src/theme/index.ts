@@ -17,6 +17,13 @@ const theme: Theme = {
     titleProps: {},
     titleStyle: textStyles.button,
   },
+  CheckBox: {
+    containerStyle: {
+      backgroundColor: 'transparent',
+      borderColor: 'transparent',
+      paddingHorizontal: 0,
+    },
+  },
 };
 
 export default theme;
