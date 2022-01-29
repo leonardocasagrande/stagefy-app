@@ -1,12 +1,11 @@
-import { RouteProp, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { ActivityIndicator, ScrollView, View, Text } from 'react-native';
+import { ActivityIndicator, ScrollView, Text, View } from 'react-native';
 import {
   RtcLocalView,
   RtcRemoteView,
   VideoRenderMode,
 } from 'react-native-agora';
-import { RootStackPagesList, useRootStackNavigation } from '../../app.routes';
+import { useRootStackNavigation } from '../../app.routes';
 import { Chat } from '../../components/Chat';
 import { RoomHeader } from '../../components/RoomHeader';
 import { useStream } from '../../context/stream';
@@ -15,17 +14,8 @@ import { styles } from './styles';
 
 const ChatRoom: React.FC = () => {
   const navigation = useRootStackNavigation();
-  const route = useRoute<RouteProp<RootStackPagesList, 'ChatRoom'>>();
-  const username = route.params.username;
 
-  const { streamEngine, channelName, peerIds, startCall, endCall } =
-    useStream();
-
-  useEffect(() => {
-    if (username.length > 0) {
-      startCall(username);
-    }
-  }, [username, startCall]);
+  const { streamEngine, channelName, peerIds, endCall } = useStream();
 
   useEffect(
     () =>

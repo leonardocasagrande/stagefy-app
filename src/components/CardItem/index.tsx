@@ -13,7 +13,14 @@ type CardItemProps = {
 export const CartItem: React.FC<CardItemProps> = ({ user, message }) => {
   return (
     <View style={styles.container}>
-      <Image source={{ uri: user.avatar_url }} style={styles.avatar} />
+      <Image
+        source={{
+          uri:
+            user.avatar_url ||
+            'http://ibaseminario.com.br/novo/wp-content/uploads/2013/09/default-avatar.png',
+        }}
+        style={styles.avatar}
+      />
       <View style={styles.userInfo}>
         <Text style={styles.userName}>{user.name}</Text>
         <Text style={styles.message}>{message}</Text>

@@ -41,7 +41,11 @@ const StreamerHome = () => {
       <View style={styles.info}>
         <Avatar
           containerStyle={styles.avatar}
-          source={{ uri: user?.avatar }}
+          source={{
+            uri:
+              user?.avatar ||
+              'http://ibaseminario.com.br/novo/wp-content/uploads/2013/09/default-avatar.png',
+          }}
           rounded
           size={120}
         />
