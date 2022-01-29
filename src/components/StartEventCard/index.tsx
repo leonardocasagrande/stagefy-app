@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { Avatar, Button } from 'react-native-elements';
-import DateUtils from '../../helpers/DateUtils';
+import DateUtils from '../../pages/utils/DateUtils';
 import textStyles from '../../theme/textStyles';
 import { IEvent } from '../../types';
 import styles from './styles';

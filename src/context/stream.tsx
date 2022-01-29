@@ -8,18 +8,18 @@ import RtcEngine, {
 import { MessageData, MessageType } from '../models/message';
 import { randomId } from '../pages/utils/generateRandomId';
 import { requestCameraAndAudioPermission } from '../pages/utils/permissions';
+import { useAuth } from './auth';
 
 const AGORA_APP_ID = 'e5c64fc6afda478996fc412a4b61aed5';
 const AGORA_TOKEN =
   '006e5c64fc6afda478996fc412a4b61aed5IAAItNZ3Z0+ma8qizS7dYYKch1OqiVHJ4rpfu5Yq6+vMxoXP3sMAAAAAEAAxeNCcy16WYQEAAQDLXpZh';
-const AGORA_CHANNEL_NAME = 'POC_Stagefy';
 
 type StreamContextProps = {
   streamEngine: RtcEngine | undefined;
   appId: string;
   token: string;
-  channelName: string;
-  startCall: (username: string) => void;
+  channelName: string | undefined;
+  startCall: (username: string) => Promise<void>;
   endCall: () => void;
   messages: MessageData[];
   peerIds: number[];
@@ -43,9 +43,10 @@ export const StreamProvider: React.FC = ({ children }) => {
   );
   const [isMicrophoneOpen, setIsMicrophoneOpen] = useState(true);
   const [isBroadcaster, setIsBroadcaster] = useState(false);
-  const [username, setUsername] = useState('');
+  const { user } = useAuth();
+  const [channelName, setChannelName] = useState<string | undefined>();
 
-  const startCall = async (newUsername: string) => {
+  const startCall = async (chName: string) => {
     try {
       const newEngine = await RtcEngine.createWithContext(
         new RtcEngineContext(AGORA_APP_ID),
@@ -58,12 +59,12 @@ export const StreamProvider: React.FC = ({ children }) => {
 
       await newEngine.joinChannelWithUserAccount(
         AGORA_TOKEN,
-        AGORA_CHANNEL_NAME,
+        chName,
         randomId(),
       );
 
       setStreamEngine(newEngine);
-      setUsername(newUsername);
+      setChannelName(chName);
     } catch (error) {
       console.log('StreamContext - startCall() error:', error);
     }
@@ -135,8 +136,9 @@ export const StreamProvider: React.FC = ({ children }) => {
       message,
       type: MessageType.TextMessage,
       user: {
-        name: username,
+        name: user.professional?.artisticName || user.name,
         avatar_url:
+          user.avatar ||
           'http://ibaseminario.com.br/novo/wp-content/uploads/2013/09/default-avatar.png',
       },
     };
@@ -183,7 +185,6 @@ export const StreamProvider: React.FC = ({ children }) => {
 
     setPeerIds([]);
     setMessages([]);
-    setUsername('');
   };
 
   const toggleCamera = async () => {
@@ -227,11 +228,11 @@ export const StreamProvider: React.FC = ({ children }) => {
       value={{
         streamEngine,
         appId: AGORA_APP_ID,
-        channelName: AGORA_CHANNEL_NAME,
         token: AGORA_TOKEN,
         startCall,
         endCall,
         toggleCamera,
+        channelName,
         messages,
         peerIds,
         sendTextMessage,

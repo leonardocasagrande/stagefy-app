@@ -10,18 +10,44 @@ import { IEvent } from '../../types';
 import StartEventCard from '../../components/StartEventCard';
 import BackHeader from '../../components/BackHeader';
 import { useRootStackNavigation } from '../../app.routes';
+import eventsService from '../../services/events';
+import axios from 'axios';
+import { useError } from '../../context/error';
+import { useStream } from '../../context/stream';
 
 const StreamerSchedule = () => {
   const { user } = useAuth();
+  const { startCall } = useStream();
   const { data } = useSWR<IEvent[]>('events/not-started', axiosFetcher);
-  const { pop } = useRootStackNavigation();
+  const { pop, navigate } = useRootStackNavigation();
+
+  const { setError } = useError();
+
+  const handleStreamStart = async (eventId: string) => {
+    try {
+      const { channelName } = await eventsService.startEvent(eventId);
+      await startCall(channelName);
+      navigate('ChatRoom', {});
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        setError(err.response?.data.message || 'Erro interno do servidor');
+      } else {
+        setError('Erro ao iniciar stream');
+      }
+    }
+  };
+
   return (
     <View style={styles.screen}>
       <BackHeader onGoBack={() => pop(1)} title="Perfil streamer" />
       <View style={styles.info}>
         <Avatar
           containerStyle={styles.avatar}
-          source={{ uri: user?.avatar }}
+          source={{
+            uri:
+              user?.avatar ||
+              'http://ibaseminario.com.br/novo/wp-content/uploads/2013/09/default-avatar.png',
+          }}
           rounded
           size={124}
         />
@@ -36,7 +62,7 @@ const StreamerSchedule = () => {
           style={styles.list}
           renderItem={({ item, index }) => (
             <>
-              <StartEventCard event={item} onStart={console.log} />
+              <StartEventCard event={item} onStart={handleStreamStart} />
               {index < data.length - 1 && <Divider />}
             </>
           )}

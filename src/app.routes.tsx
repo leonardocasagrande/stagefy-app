@@ -17,9 +17,7 @@ import StreamerSchedule from './pages/StreamerSchedule';
 
 export type RootStackPagesList = {
   Home: undefined;
-  ChatRoom: {
-    username: string;
-  };
+  ChatRoom: {};
   Introduction: undefined;
   AppBuilder: undefined;
   Login: undefined;
