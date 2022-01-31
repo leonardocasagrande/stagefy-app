@@ -1,12 +1,21 @@
-import React from 'react';
-import { View, FlatList } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { FlatList, View } from 'react-native';
 import { useStream } from '../../context/stream';
-import { CartItem } from '../CardItem';
+import { MessageData } from '../../models/message';
 import { ChatActions } from '../ChatActions';
+import Message from '../Message';
 import { styles } from './styles';
 
 export const Chat: React.FC = () => {
   const { messages } = useStream();
+
+  const listRef = useRef<FlatList<MessageData>>(null);
+
+  useEffect(() => {
+    if (messages && listRef.current) {
+      listRef.current.scrollToEnd();
+    }
+  }, [messages, listRef]);
 
   return (
     <View style={styles.container}>
@@ -15,8 +24,9 @@ export const Chat: React.FC = () => {
           data={messages}
           showsVerticalScrollIndicator={false}
           keyExtractor={item => item.id}
+          ref={listRef}
           renderItem={({ item }) => (
-            <CartItem message={item.message} user={item.user} />
+            <Message message={item.message} user={item.user} />
           )}
         />
       </View>

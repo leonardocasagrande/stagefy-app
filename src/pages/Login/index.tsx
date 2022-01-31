@@ -13,8 +13,8 @@ import loginSchema from '../../schemas/login';
 import textStyles from '../../theme/textStyles';
 import styles from './styles';
 import axios from 'axios';
-import { ProfileRoleEnum } from '../../types/index.d';
 import { useLoading } from '../../context/loading';
+import { ProfileRoleEnum } from '../../models/role';
 
 const Login: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -46,7 +46,7 @@ const Login: React.FC = () => {
           } else {
             reset({
               index: 0,
-              routes: [{ name: 'Home' }],
+              routes: [{ name: 'HomeTabs' }],
             });
           }
         } catch (err) {

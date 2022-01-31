@@ -1,22 +1,21 @@
-import React from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-
-import Home from './pages/Home';
-import ChatRoom from './pages/ChatRoom';
-import Introduction from './pages/Introduction';
+import React from 'react';
 import AppBuilder from './pages/AppBuilder';
-import Login from './pages/Login';
+import ChatRoom from './pages/ChatRoom';
 import CreateAccount from './pages/CreateAccount';
+import HomeTabs from './pages/HomeTabs';
+import Introduction from './pages/Introduction';
+import Login from './pages/Login';
 import StreamerHome from './pages/StreamerHome';
 import StreamerSchedule from './pages/StreamerSchedule';
 
 export type RootStackPagesList = {
-  Home: undefined;
+  HomeTabs: undefined;
   ChatRoom: {};
   Introduction: undefined;
   AppBuilder: undefined;
@@ -57,7 +56,7 @@ const AppNavigationContainer: React.FC = () => {
             name="StreamerSchedule"
             component={StreamerSchedule}
           />
-          <RootStackScreen name="Home" component={Home} />
+          <RootStackScreen name="HomeTabs" component={HomeTabs} />
           <RootStackScreen name="ChatRoom" component={ChatRoom} />
         </RootStackGroup>
       </RootStackNavigator>

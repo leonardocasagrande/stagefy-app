@@ -1,19 +1,19 @@
+import axios from 'axios';
 import React from 'react';
 import { FlatList, View } from 'react-native';
 import { Avatar, Divider, Text } from 'react-native-elements';
-import { useAuth } from '../../context/auth';
-import textStyles from '../../theme/textStyles';
-import styles from './styles';
 import useSWR from 'swr';
-import { axiosFetcher } from '../../config/axios';
-import { IEvent } from '../../types';
-import StartEventCard from '../../components/StartEventCard';
-import BackHeader from '../../components/BackHeader';
 import { useRootStackNavigation } from '../../app.routes';
-import eventsService from '../../services/events';
-import axios from 'axios';
+import BackHeader from '../../components/BackHeader';
+import StartEventCard from '../../components/StartEventCard';
+import { axiosFetcher } from '../../config/axios';
+import { useAuth } from '../../context/auth';
 import { useError } from '../../context/error';
 import { useStream } from '../../context/stream';
+import eventsService from '../../services/events';
+import textStyles from '../../theme/textStyles';
+import { IEvent } from '../../types';
+import styles from './styles';
 
 const StreamerSchedule = () => {
   const { user } = useAuth();
@@ -23,10 +23,10 @@ const StreamerSchedule = () => {
 
   const { setError } = useError();
 
-  const handleStreamStart = async (eventId: string) => {
+  const handleStreamStart = async (event: IEvent) => {
     try {
-      const { channelName } = await eventsService.startEvent(eventId);
-      await startCall(channelName);
+      const token = await eventsService.previewEvent(event.id);
+      await startCall(event, token);
       navigate('ChatRoom', {});
     } catch (err) {
       if (axios.isAxiosError(err)) {

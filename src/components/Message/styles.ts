@@ -5,14 +5,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 5,
+    backgroundColor: 'transparent',
   },
   input: {
     backgroundColor: '#FFF',
-  },
-  avatar: {
-    borderRadius: 35,
-    width: 35,
-    height: 35,
   },
   userInfo: {
     marginLeft: 10,

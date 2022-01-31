@@ -6,20 +6,20 @@ import RtcEngine, {
   RtcEngineContext,
 } from 'react-native-agora';
 import { MessageData, MessageType } from '../models/message';
+import { ProfileRoleEnum } from '../models/role';
 import { randomId } from '../pages/utils/generateRandomId';
 import { requestCameraAndAudioPermission } from '../pages/utils/permissions';
+import { IEvent } from '../types';
 import { useAuth } from './auth';
 
-const AGORA_APP_ID = 'e5c64fc6afda478996fc412a4b61aed5';
-const AGORA_TOKEN =
-  '006e5c64fc6afda478996fc412a4b61aed5IAAItNZ3Z0+ma8qizS7dYYKch1OqiVHJ4rpfu5Yq6+vMxoXP3sMAAAAAEAAxeNCcy16WYQEAAQDLXpZh';
+const AGORA_APP_ID = 'a053937c8a524a0690b70625664e4df6';
 
 type StreamContextProps = {
   streamEngine: RtcEngine | undefined;
   appId: string;
-  token: string;
-  channelName: string | undefined;
-  startCall: (username: string) => Promise<void>;
+  event: IEvent | undefined;
+  startCall: (event: IEvent, token: string) => Promise<void>;
+  joinCall: (event: IEvent, token: string) => Promise<void>;
   endCall: () => void;
   messages: MessageData[];
   peerIds: number[];
@@ -29,6 +29,10 @@ type StreamContextProps = {
   isMicrophoneOpen: boolean;
   toggleBroadcaster: () => void;
   isBroadcaster: boolean;
+  started: boolean;
+  setStarted: (val: boolean) => void;
+  selfPeerId: number | undefined;
+  streamEnded: boolean;
 };
 
 export const StreamContext = createContext<StreamContextProps>(
@@ -38,60 +42,97 @@ export const StreamContext = createContext<StreamContextProps>(
 export const StreamProvider: React.FC = ({ children }) => {
   const [messages, setMessages] = useState<MessageData[]>([]);
   const [peerIds, setPeerIds] = useState<number[]>([]);
+  const [selfPeerId, setSelfPeerId] = useState<number | undefined>();
+  const [started, setStarted] = useState(false);
   const [streamEngine, setStreamEngine] = useState<RtcEngine | undefined>(
     undefined,
   );
   const [isMicrophoneOpen, setIsMicrophoneOpen] = useState(true);
   const [isBroadcaster, setIsBroadcaster] = useState(false);
   const { user } = useAuth();
-  const [channelName, setChannelName] = useState<string | undefined>();
+  const [event, setEvent] = useState<IEvent | undefined>();
+  const [streamEnded, setStreamEnded] = useState(false);
 
-  const startCall = async (chName: string) => {
+  const startCall = async (evt: IEvent, token: string) => {
     try {
       const newEngine = await RtcEngine.createWithContext(
         new RtcEngineContext(AGORA_APP_ID),
       );
       await newEngine.enableVideo();
-      await newEngine.enableAudio();
       await newEngine.setChannelProfile(ChannelProfile.LiveBroadcasting);
       await newEngine.setClientRole(ClientRole.Broadcaster);
       await newEngine.setCameraAutoFocusFaceModeEnabled(true);
 
-      await newEngine.joinChannelWithUserAccount(
-        AGORA_TOKEN,
-        chName,
-        randomId(),
-      );
-
+      await newEngine.joinChannelWithUserAccount(token, evt.id, user!.id);
+      setEvent(evt);
       setStreamEngine(newEngine);
-      setChannelName(chName);
     } catch (error) {
       console.log('StreamContext - startCall() error:', error);
     }
   };
 
+  const joinCall = async (evt: IEvent, token: string) => {
+    const newEngine = await RtcEngine.createWithContext(
+      new RtcEngineContext(AGORA_APP_ID),
+    );
+    await newEngine.enableVideo();
+    await newEngine.setChannelProfile(ChannelProfile.LiveBroadcasting);
+    await newEngine.setClientRole(ClientRole.Broadcaster);
+    await newEngine.joinChannelWithUserAccount(token, evt.id, user!.id, {
+      publishLocalAudio: false,
+      publishLocalVideo: false,
+    });
+
+    // setPeerIds([evt.streamerPeerId!]);
+    setEvent(evt);
+    setStreamEngine(newEngine);
+  };
+
   const setupListeners = (newEngine: RtcEngine) => {
-    newEngine.addListener('UserJoined', (userId, elapsed) => {
-      console.log('UserJoined', userId, elapsed);
-      setMessages(state => [...state]);
-      setPeerIds(state => {
-        if (state.find(item => item === userId)) {
-          return state;
-        } else {
-          return [...state, userId];
+    newEngine.addListener('UserJoined', async (userId, elapsed) => {
+      // if (user?.profileRole === ProfileRoleEnum.Professional) {
+      //   const a = await streamEngine?.getUserInfoByUid(userId);
+      //   const message: MessageData = {
+      //     id: randomId(),
+      //     message: 'entrou',
+      //     type: MessageType.TextMessage,
+      //     user: {
+      //       avatar_url:
+      //         'http://ibaseminario.com.br/novo/wp-content/uploads/2013/09/default-avatar.png',
+      //       name: a?.userAccount || '',
+      //     },
+      //   };
+      //   console.log('UserJoined', userId, elapsed, a);
+      //   setMessages(state => [...state, message]);
+      // }
+      // setPeerIds(state => {
+      //   if (state.find(item => item === userId)) {
+      //     return state;
+      //   } else {
+      //     return [...state, userId];
+      //   }
+      // });
+    });
+
+    newEngine.addListener('UserOffline', userId => {
+      console.log('OFFLINE', userId, user?.name, event);
+      if (
+        user?.profileRole !== ProfileRoleEnum.Professional &&
+        userId === event?.streamerPeerId
+      ) {
+        setStreamEnded(true);
+      }
+    });
+
+    newEngine.addListener(
+      'JoinChannelSuccess',
+      async (channel, userId, elapsed) => {
+        if (user?.profileRole === ProfileRoleEnum.Professional) {
+          setSelfPeerId(userId);
         }
-      });
-    });
-
-    newEngine.addListener('UserOffline', (userId, elapsed) => {
-      console.log('UserOffline', userId, elapsed);
-
-      setPeerIds(state => state.filter(item => item !== userId));
-    });
-
-    newEngine.addListener('JoinChannelSuccess', (channel, userId, elapsed) => {
-      console.log('JoinChannelSuccess', channel, userId, elapsed);
-    });
+        console.log('JoinChannelSuccess', channel, userId, elapsed);
+      },
+    );
 
     newEngine.addListener('StreamMessage', (userId, streamId, data) => {
       console.log('StreamMessage', userId, streamId, data);
@@ -116,12 +157,6 @@ export const StreamProvider: React.FC = ({ children }) => {
         } else {
           await streamEngine.disableVideo();
         }
-
-        await streamEngine.setClientRole(
-          isBroadcaster ? ClientRole.Audience : ClientRole.Broadcaster,
-        );
-
-        setIsBroadcaster(state => !state);
       } catch (error) {
         console.log('StreamContext - toggleBroadcaster() error:', error);
       }
@@ -136,9 +171,9 @@ export const StreamProvider: React.FC = ({ children }) => {
       message,
       type: MessageType.TextMessage,
       user: {
-        name: user.professional?.artisticName || user.name,
+        name: user!.professional?.artisticName || user!.name,
         avatar_url:
-          user.avatar ||
+          user!.avatar ||
           'http://ibaseminario.com.br/novo/wp-content/uploads/2013/09/default-avatar.png',
       },
     };
@@ -170,12 +205,12 @@ export const StreamProvider: React.FC = ({ children }) => {
   const endCall = async () => {
     if (streamEngine) {
       try {
-        console.log('streamEngine before leave:', streamEngine);
+        await streamEngine.disableVideo();
+        await streamEngine.disableAudio();
         await streamEngine.leaveChannel();
-        console.log('streamEngine beforeDestroy', streamEngine);
         await streamEngine.destroy();
-        console.log('streamEngine afterDestroy', streamEngine);
         setStreamEngine(undefined);
+        setStarted(false);
       } catch (error) {
         console.log('StreamContext - endCall() error:', error);
       }
@@ -228,11 +263,10 @@ export const StreamProvider: React.FC = ({ children }) => {
       value={{
         streamEngine,
         appId: AGORA_APP_ID,
-        token: AGORA_TOKEN,
         startCall,
         endCall,
         toggleCamera,
-        channelName,
+        event,
         messages,
         peerIds,
         sendTextMessage,
@@ -240,6 +274,11 @@ export const StreamProvider: React.FC = ({ children }) => {
         toggleMicrophone,
         toggleBroadcaster,
         isBroadcaster,
+        joinCall,
+        started,
+        setStarted,
+        selfPeerId,
+        streamEnded,
       }}
     >
       {children}

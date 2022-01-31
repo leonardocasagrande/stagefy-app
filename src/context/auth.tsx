@@ -20,13 +20,13 @@ interface SigninCredentials {
 }
 
 interface IAuthState {
-  user: IUser;
+  user?: IUser;
   token: string;
   refreshToken: string;
 }
 
 interface IAuthContextData {
-  user: IUser;
+  user: IUser | undefined;
   token: string;
   refreshToken: string;
   signIn(credentials: SigninCredentials): Promise<ProfileRoleEnum>;

@@ -9,8 +9,9 @@ export const styles = StyleSheet.create({
   },
   messagesContainer: {
     padding: 0,
-    paddingLeft: 10,
+    paddingLeft: 20,
     maxHeight: 200,
-    backgroundColor: 'rgba(0,0,0,.5)',
+    backgroundColor: 'rgba(0,0,0,.2)',
+    marginBottom: 10,
   },
 });

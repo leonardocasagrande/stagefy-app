@@ -36,6 +36,7 @@
 		9D83BA23DD8F486AA2BEA999 /* BalooBhaijaan2-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE43676E29654E6FA504E003 /* BalooBhaijaan2-Regular.ttf */; };
 		78B023A4484B44A88FC3A581 /* BalooBhaijaan2-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 324267CAA8944B14AA8614C6 /* BalooBhaijaan2-SemiBold.ttf */; };
 		2A36829245AE4E5399F8FE66 /* BalooBhaijaan-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C384C4522A8424AB021794E /* BalooBhaijaan-Regular.ttf */; };
+		CF069F9A823843F181E3E87B /* WorkSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2553FC0D89D4D55A3B8272D /* WorkSans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		AE43676E29654E6FA504E003 /* BalooBhaijaan2-Regular.ttf */ = {isa = PBXFileReference; name = "BalooBhaijaan2-Regular.ttf"; path = "../assets/fonts/BalooBhaijaan2-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		324267CAA8944B14AA8614C6 /* BalooBhaijaan2-SemiBold.ttf */ = {isa = PBXFileReference; name = "BalooBhaijaan2-SemiBold.ttf"; path = "../assets/fonts/BalooBhaijaan2-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		2C384C4522A8424AB021794E /* BalooBhaijaan-Regular.ttf */ = {isa = PBXFileReference; name = "BalooBhaijaan-Regular.ttf"; path = "../assets/fonts/BalooBhaijaan-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E2553FC0D89D4D55A3B8272D /* WorkSans-Regular.ttf */ = {isa = PBXFileReference; name = "WorkSans-Regular.ttf"; path = "../assets/fonts/WorkSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +221,7 @@
 				AE43676E29654E6FA504E003 /* BalooBhaijaan2-Regular.ttf */,
 				324267CAA8944B14AA8614C6 /* BalooBhaijaan2-SemiBold.ttf */,
 				2C384C4522A8424AB021794E /* BalooBhaijaan-Regular.ttf */,
+				E2553FC0D89D4D55A3B8272D /* WorkSans-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				9D83BA23DD8F486AA2BEA999 /* BalooBhaijaan2-Regular.ttf in Resources */,
 				78B023A4484B44A88FC3A581 /* BalooBhaijaan2-SemiBold.ttf in Resources */,
 				2A36829245AE4E5399F8FE66 /* BalooBhaijaan-Regular.ttf in Resources */,
+				CF069F9A823843F181E3E87B /* WorkSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

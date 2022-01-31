@@ -1,8 +1,10 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
+import { Text, View } from 'react-native';
+import { Avatar } from 'react-native-elements';
+import textStyles from '../../theme/textStyles';
 import { styles } from './styles';
 
-type CardItemProps = {
+type MessageProps = {
   message: string;
   user: {
     name: string;
@@ -10,21 +12,24 @@ type CardItemProps = {
   };
 };
 
-export const CartItem: React.FC<CardItemProps> = ({ user, message }) => {
+const Message = ({ message, user }: MessageProps) => {
   return (
     <View style={styles.container}>
-      <Image
+      <Avatar
+        size={24}
+        rounded
         source={{
           uri:
             user.avatar_url ||
             'http://ibaseminario.com.br/novo/wp-content/uploads/2013/09/default-avatar.png',
         }}
-        style={styles.avatar}
       />
       <View style={styles.userInfo}>
-        <Text style={styles.userName}>{user.name}</Text>
-        <Text style={styles.message}>{message}</Text>
+        <Text style={textStyles.messageName}>{user.name}</Text>
+        <Text style={textStyles.messageContent}>{message}</Text>
       </View>
     </View>
   );
 };
+
+export default Message;

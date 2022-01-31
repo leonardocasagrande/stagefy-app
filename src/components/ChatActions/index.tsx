@@ -7,6 +7,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 
 import giftImg from '../../assets/images/gift.png';
 import { useStream } from '../../context/stream';
+import colors from '../../theme/colors';
 
 export const ChatActions: React.FC = () => {
   const {
@@ -20,17 +21,19 @@ export const ChatActions: React.FC = () => {
   const [text, setText] = useState('');
 
   const handleSubmit = () => {
-    sendTextMessage(text);
+    if (text) {
+      sendTextMessage(text);
 
-    setText('');
+      setText('');
+    }
   };
 
   return (
     <View style={styles.container}>
       <TextInput
         maxLength={200}
-        placeholder="Enviar mensagem..."
-        placeholderTextColor="#f5f5f5"
+        placeholder="Adicionar um comentário"
+        placeholderTextColor={colors.disabled}
         onSubmitEditing={handleSubmit}
         returnKeyType="send"
         style={styles.input}
@@ -38,7 +41,7 @@ export const ChatActions: React.FC = () => {
         onChangeText={setText}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+      {/* <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <IoniconIcon name="send" color="#FFF" size={22} />
       </TouchableOpacity>
 
@@ -61,7 +64,7 @@ export const ChatActions: React.FC = () => {
         onPress={() => console.log('not implemented')}
       >
         <Image source={giftImg} style={styles.giftImage} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

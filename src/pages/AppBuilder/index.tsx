@@ -5,7 +5,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { useRootStackNavigation } from '../../app.routes';
 import { useAuth } from '../../context/auth';
 import { useError } from '../../context/error';
-import { ProfileRoleEnum } from '../../types/index.d';
+import { ProfileRoleEnum } from '../../models/role';
 
 const AppBuilder: React.FC = () => {
   const { reset } = useRootStackNavigation();
@@ -22,7 +22,7 @@ const AppBuilder: React.FC = () => {
       } else {
         reset({
           index: 0,
-          routes: [{ name: 'Home' }],
+          routes: [{ name: 'HomeTabs' }],
         });
       }
     } catch (err) {

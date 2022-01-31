@@ -1,14 +1,9 @@
+import { ProfileRoleEnum } from '../models/role';
+
 export interface IAuth {
   token: string;
   refreshToken: string;
   user: IUser;
-}
-
-export enum ProfileRoleEnum {
-  Admin = 'ADMIN',
-  Professional = 'PROFESSIONAL',
-  Responsible = 'RESPONSIBLE',
-  Student = 'STUDENT',
 }
 
 export interface IUser {
@@ -23,17 +18,21 @@ export interface IUser {
 export interface IProfessional {
   artisticName: string;
   bio: string;
+  user: IUser;
 }
 
 export interface IEvent {
-  channelName?: string;
   date: string;
   id: string;
   image: string;
   name: string;
   views: number;
+  professional: IProfessional;
+  currentViews: number;
+  streamerPeerId?: number;
 }
 
-export interface IStartedEvent extends IEvent {
-  channelName: string;
+export interface ILike {
+  user: IUser;
+  event: IEvent;
 }

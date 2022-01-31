@@ -8,7 +8,7 @@ import styles from './styles';
 
 interface IStartEventCardProps {
   event: IEvent;
-  onStart: (id: string) => void;
+  onStart: (event: IEvent) => void;
 }
 
 const StartEventCard = ({ event, onStart }: IStartEventCardProps) => {
@@ -39,7 +39,7 @@ const StartEventCard = ({ event, onStart }: IStartEventCardProps) => {
           <Button
             title="Iniciar a live"
             disabled={new Date(event.date) >= new Date()}
-            onPress={() => onStart(event.id)}
+            onPress={() => onStart(event)}
             buttonStyle={styles.button}
           />
         </View>

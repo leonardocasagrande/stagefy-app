@@ -1,4 +1,5 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 import {
   faEye,
   faEyeSlash,
@@ -10,6 +11,9 @@ import {
   faSatelliteDish,
   faTrashAlt,
   faSignOutAlt,
+  faHome,
+  faMedal,
+  faBookOpen,
 } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { ThemeProvider } from 'react-native-elements';
@@ -33,6 +37,10 @@ library.add(
   faSatelliteDish,
   faTrashAlt,
   faSignOutAlt,
+  faHome,
+  faMedal,
+  faBookOpen,
+  faUser,
 );
 
 const App = () => {

@@ -1,19 +1,24 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../theme/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    height: 60,
-    backgroundColor: '#0E0D0D',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    // height: 60,
+    // backgroundColor: '#0E0D0D',
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+    marginBottom: 24,
+    marginHorizontal: 24,
   },
   input: {
-    width: '50%',
-    height: 40,
+    width: '100%',
+    height: 34,
     padding: 6,
-    backgroundColor: '#1D1D1D',
-    color: '#FFF',
+    paddingHorizontal: 24,
+    backgroundColor: colors.secondaryBg,
+    borderRadius: 50,
+    color: '#000000',
   },
   button: {
     alignItems: 'center',
