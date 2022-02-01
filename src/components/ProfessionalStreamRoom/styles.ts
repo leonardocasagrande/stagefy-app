@@ -45,4 +45,20 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: { marginTop: 20, fontSize: 16 },
+  peersContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  peerCamContainer: {
+    position: 'relative',
+    flex: 1,
+  },
+  peerCam: {
+    flex: 1,
+  },
+  removeButton: {
+    position: 'absolute',
+    top: 12,
+    right: 24,
+  },
 });

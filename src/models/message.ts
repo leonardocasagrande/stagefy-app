@@ -1,6 +1,10 @@
 export enum MessageType {
   TextMessage = 'Text message',
   AnimationMessage = 'Animation message',
+  Permission = 'Permission',
+  PermissionConceded = 'Permission conceded',
+  PermissionDenied = 'Permission denied',
+  PermissionRevoked = 'Permission revoked',
 }
 
 export type MessageData = {
@@ -11,5 +15,7 @@ export type MessageData = {
   user: {
     name: string;
     avatar_url: string;
+    id: string;
+    uid?: number;
   };
 };

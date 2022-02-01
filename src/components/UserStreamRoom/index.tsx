@@ -1,18 +1,24 @@
 import React, { useEffect } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
-import { RtcRemoteView, VideoRenderMode } from 'react-native-agora';
+import {
+  RtcLocalView,
+  RtcRemoteView,
+  VideoRenderMode,
+} from 'react-native-agora';
 import { useRootStackNavigation } from '../../app.routes';
 import { Chat } from '../../components/Chat';
-import { RoomHeader } from '../../components/RoomHeader';
-import RoomSidebar from '../../components/RoomSidebar';
+import { RoomHeader } from './RoomHeader';
+import RoomSidebar from './RoomSidebar';
 import { useStream } from '../../context/stream';
 import eventsService from '../../services/events';
 import { styles } from './styles';
+import { randomId } from '../../pages/utils/generateRandomId';
 
 const UserStreamRoom: React.FC = () => {
   const navigation = useRootStackNavigation();
 
-  const { streamEngine, event, endCall, streamEnded } = useStream();
+  const { streamEngine, event, endCall, streamEnded, peerIds, isBroadcaster } =
+    useStream();
 
   useEffect(
     () =>
@@ -24,10 +30,12 @@ const UserStreamRoom: React.FC = () => {
   );
 
   useEffect(() => {
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'HomeTabs' }],
-    });
+    if (streamEnded) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'HomeTabs' }],
+      });
+    }
   }, [streamEnded, navigation]);
 
   return (
@@ -41,6 +49,27 @@ const UserStreamRoom: React.FC = () => {
             renderMode={VideoRenderMode.Hidden}
             zOrderMediaOverlay={true}
           />
+          {(!!peerIds.length || isBroadcaster) && (
+            <View style={styles.peersContainer}>
+              {isBroadcaster && (
+                <RtcLocalView.SurfaceView
+                  style={styles.frame}
+                  channelId={event.id}
+                  renderMode={VideoRenderMode.Hidden}
+                />
+              )}
+              {peerIds.map(value => (
+                <RtcRemoteView.SurfaceView
+                  key={`${event.id}${value}${randomId()}`}
+                  style={styles.frame}
+                  uid={value}
+                  channelId={event.id}
+                  renderMode={VideoRenderMode.Hidden}
+                  zOrderMediaOverlay={true}
+                />
+              ))}
+            </View>
+          )}
 
           <RoomHeader />
           <RoomSidebar />

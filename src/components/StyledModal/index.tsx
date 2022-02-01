@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  ViewStyle,
 } from 'react-native';
 import { Text } from 'react-native-elements';
 import textStyles from '../../theme/textStyles';
@@ -15,6 +16,7 @@ export interface IStyledModalProps extends ModalProps {
   icon?: ReactNode;
   title?: string;
   description?: string | null;
+  contentStyle?: ViewStyle;
 }
 
 const StyledModal = (props: IStyledModalProps) => {
@@ -31,7 +33,7 @@ const StyledModal = (props: IStyledModalProps) => {
         onPressOut={props.onClose}
       >
         <TouchableWithoutFeedback>
-          <View style={styles.view}>
+          <View style={{ ...styles.view, ...props.contentStyle }}>
             <TouchableWithoutFeedback onPress={props.onClose}>
               <View style={styles.bar} />
             </TouchableWithoutFeedback>

@@ -45,4 +45,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: { marginTop: 20, fontSize: 16 },
+  peersContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
 });

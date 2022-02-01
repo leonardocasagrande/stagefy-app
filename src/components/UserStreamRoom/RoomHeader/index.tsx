@@ -3,11 +3,11 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Avatar, Text } from 'react-native-elements';
 import useSWR from 'swr';
-import { useRootStackNavigation } from '../../app.routes';
-import { axiosFetcher } from '../../config/axios';
-import { useStream } from '../../context/stream';
-import colors from '../../theme/colors';
-import textStyles from '../../theme/textStyles';
+import { useRootStackNavigation } from '../../../app.routes';
+import { axiosFetcher } from '../../../config/axios';
+import { useStream } from '../../../context/stream';
+import colors from '../../../theme/colors';
+import textStyles from '../../../theme/textStyles';
 import { styles } from './styles';
 
 export const RoomHeader: React.FC = () => {

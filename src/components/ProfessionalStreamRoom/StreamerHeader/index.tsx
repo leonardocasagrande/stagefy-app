@@ -2,10 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { useRootStackNavigation } from '../../app.routes';
-import { useStream } from '../../context/stream';
-import colors from '../../theme/colors';
-import textStyles from '../../theme/textStyles';
+import { useRootStackNavigation } from '../../../app.routes';
+import { useStream } from '../../../context/stream';
+import colors from '../../../theme/colors';
+import textStyles from '../../../theme/textStyles';
 import { styles } from './styles';
 
 const StreamerHeader = () => {

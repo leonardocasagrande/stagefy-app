@@ -53,7 +53,7 @@ const CreateAccount: React.FC = () => {
         });
         reset({
           index: 0,
-          routes: [{ name: 'Home' }],
+          routes: [{ name: 'HomeTabs' }],
         });
         setSuccess('Conta criada com sucesso!');
       } catch (err) {
@@ -91,6 +91,7 @@ const CreateAccount: React.FC = () => {
             onBlur={handleBlur('email')}
             placeholder="Digite seu e-mail"
             errorMessage={touched.email ? errors.email : undefined}
+            autoCapitalize="none"
           />
           <StyledInput
             label="Senha"

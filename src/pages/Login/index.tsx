@@ -77,6 +77,7 @@ const Login: React.FC = () => {
             onBlur={handleBlur('email')}
             placeholder="Digite seu e-mail"
             errorMessage={touched.email ? errors.email : undefined}
+            autoCapitalize="none"
           />
           <StyledInput
             label="Senha"

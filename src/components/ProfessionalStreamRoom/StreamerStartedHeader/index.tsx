@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, Button } from 'react-native-elements';
-import { useStream } from '../../context/stream';
-import textStyles from '../../theme/textStyles';
+import { useStream } from '../../../context/stream';
+import textStyles from '../../../theme/textStyles';
 import { styles } from './styles';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import colors from '../../theme/colors';
+import colors from '../../../theme/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import CenterModal from '../CenterModal';
-import eventsService from '../../services/events';
-import { useRootStackNavigation } from '../../app.routes';
+import CenterModal from '../../CenterModal';
+import eventsService from '../../../services/events';
+import { useRootStackNavigation } from '../../../app.routes';
 import useSWR from 'swr';
-import { axiosFetcher } from '../../config/axios';
+import { axiosFetcher } from '../../../config/axios';
 
 const StreamerStartedHeader = () => {
   const { event, endCall } = useStream();
