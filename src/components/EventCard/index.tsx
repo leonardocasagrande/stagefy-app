@@ -1,15 +1,15 @@
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import { ImageBackground, TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-elements';
 import colors from '../../theme/colors';
 import textStyles from '../../theme/textStyles';
-import { IStartedEvent } from '../../types';
+import { IEvent } from '../../types';
 import styles from './styles';
 
 interface IEventCard {
-  event: IStartedEvent;
-  onPress: (event: IStartedEvent) => Promise<void>;
+  event: IEvent;
+  onPress: (event: IEvent) => Promise<void>;
 }
 
 const EventCard = ({ event, onPress }: IEventCard) => {
@@ -24,7 +24,7 @@ const EventCard = ({ event, onPress }: IEventCard) => {
             <View style={styles.viewWrapper}>
               <FontAwesomeIcon
                 style={styles.icon}
-                icon="eye"
+                name="eye"
                 color={colors.secondaryBg}
               />
               <Text style={textStyles.liveSubtitle}>{event.views}</Text>

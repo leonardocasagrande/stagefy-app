@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Avatar, Text } from 'react-native-elements';
@@ -31,7 +31,7 @@ export const RoomHeader: React.FC = () => {
     <>
       <View style={styles.root}>
         <TouchableOpacity style={styles.icon} onPress={handleEndCall}>
-          <FontAwesomeIcon icon="chevron-left" color={colors.primaryBg} />
+          <FontAwesomeIcon name="chevron-left" color={colors.primaryBg} />
         </TouchableOpacity>
         <Avatar
           source={{
@@ -46,18 +46,12 @@ export const RoomHeader: React.FC = () => {
           {event?.professional.artisticName}
         </Text>
         <View style={styles.views}>
-          <FontAwesomeIcon icon="eye" color={colors.primaryMain} />
+          <FontAwesomeIcon name="eye" color={colors.primaryMain} />
           <Text style={{ ...textStyles.viewCount, ...styles.viewCount }}>
             {data ? data.currentViews : ''}
           </Text>
         </View>
       </View>
-      {/* <TouchableOpacity style={styles.button} onPress={handleEndCall}>
-        <AntDesignIcon name="closecircle" color="#FFF" size={25} />
-      </TouchableOpacity> */}
-      {/* <TouchableOpacity style={styles.buttonSwitch} onPress={toggleCamera}>
-        <MaterialIconsIcon name="switch-camera" color="#FFF" size={25} />
-      </TouchableOpacity> */}
     </>
   );
 };

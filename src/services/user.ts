@@ -1,4 +1,3 @@
-// import { Axios } from '../config/axios';
 import { Axios } from '../config/axios';
 import { IUser } from '../types';
 

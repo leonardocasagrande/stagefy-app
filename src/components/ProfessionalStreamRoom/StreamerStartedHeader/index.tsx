@@ -7,7 +7,7 @@ import textStyles from '../../../theme/textStyles';
 import { styles } from './styles';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import colors from '../../../theme/colors';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import CenterModal from '../../CenterModal';
 import eventsService from '../../../services/events';
 import { useRootStackNavigation } from '../../../app.routes';
@@ -63,7 +63,7 @@ const StreamerStartedHeader = () => {
         <View style={styles.avatarContainer}>
           <FontAwesomeIcon
             style={styles.icon}
-            icon="eye"
+            name="eye"
             color={colors.primaryBg}
           />
           <Text style={textStyles.viewCountWhite}>

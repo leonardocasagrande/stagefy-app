@@ -1,5 +1,4 @@
-// import { Image, Text } from 'react-native-elements';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
@@ -17,6 +16,7 @@ import axios from 'axios';
 import { useError } from '../../context/error';
 import { useSuccess } from '../../context/success';
 import { useLoading } from '../../context/loading';
+import colors from '../../theme/colors';
 
 const CreateAccount: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -105,7 +105,11 @@ const CreateAccount: React.FC = () => {
               <TouchableOpacity
                 onPress={() => setPasswordVisible(prevValue => !prevValue)}
               >
-                <FontAwesomeIcon icon={passwordVisible ? 'eye-slash' : 'eye'} />
+                <FontAwesomeIcon
+                  color={colors.textMain}
+                  name={passwordVisible ? 'eye-slash' : 'eye'}
+                  size={15}
+                />
               </TouchableOpacity>
             }
           />
@@ -122,7 +126,11 @@ const CreateAccount: React.FC = () => {
               <TouchableOpacity
                 onPress={() => setPasswordVisible(prevValue => !prevValue)}
               >
-                <FontAwesomeIcon icon={passwordVisible ? 'eye-slash' : 'eye'} />
+                <FontAwesomeIcon
+                  color={colors.textMain}
+                  name={passwordVisible ? 'eye-slash' : 'eye'}
+                  size={15}
+                />
               </TouchableOpacity>
             }
           />

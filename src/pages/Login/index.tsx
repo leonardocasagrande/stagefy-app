@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
@@ -15,6 +15,7 @@ import styles from './styles';
 import axios from 'axios';
 import { useLoading } from '../../context/loading';
 import { ProfileRoleEnum } from '../../models/role';
+import colors from '../../theme/colors';
 
 const Login: React.FC = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -90,7 +91,11 @@ const Login: React.FC = () => {
               <TouchableOpacity
                 onPress={() => setPasswordVisible(prevValue => !prevValue)}
               >
-                <FontAwesomeIcon icon={passwordVisible ? 'eye-slash' : 'eye'} />
+                <FontAwesomeIcon
+                  color={colors.textMain}
+                  size={15}
+                  name={passwordVisible ? 'eye-slash' : 'eye'}
+                />
               </TouchableOpacity>
             }
           />

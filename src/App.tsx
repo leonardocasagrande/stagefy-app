@@ -1,20 +1,3 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
-import {
-  faEye,
-  faEyeSlash,
-  faChevronLeft,
-  faChevronRight,
-  faEdit,
-  faUsers,
-  faWallet,
-  faSatelliteDish,
-  faTrashAlt,
-  faSignOutAlt,
-  faHome,
-  faMedal,
-  faBookOpen,
-} from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { ThemeProvider } from 'react-native-elements';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -25,23 +8,6 @@ import { LoadingProvider } from './context/loading';
 import { StreamProvider } from './context/stream';
 import { SuccessProvider } from './context/success';
 import theme from './theme';
-
-library.add(
-  faEye,
-  faEyeSlash,
-  faChevronLeft,
-  faChevronRight,
-  faEdit,
-  faUsers,
-  faWallet,
-  faSatelliteDish,
-  faTrashAlt,
-  faSignOutAlt,
-  faHome,
-  faMedal,
-  faBookOpen,
-  faUser,
-);
 
 const App = () => {
   return (

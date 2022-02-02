@@ -1,8 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import textStyles from '../../theme/textStyles';
 import styles from './styles';
+import colors from '../../theme/colors';
 
 interface IBackHeaderProps {
   title: string;
@@ -13,7 +14,11 @@ const BackHeader = ({ title, onGoBack }: IBackHeaderProps) => {
   return (
     <TouchableOpacity onPress={onGoBack}>
       <View style={styles.root}>
-        <FontAwesomeIcon style={styles.icon} icon="chevron-left" />
+        <FontAwesomeIcon
+          color={colors.textMain}
+          style={styles.icon}
+          name="chevron-left"
+        />
         <Text style={textStyles.navigateText}>{title}</Text>
       </View>
     </TouchableOpacity>

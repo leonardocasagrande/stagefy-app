@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
@@ -15,7 +15,7 @@ const StreamerHeader = () => {
     <View style={styles.root}>
       <TouchableOpacity onPress={goBack}>
         <View style={styles.backButton}>
-          <FontAwesomeIcon icon="chevron-left" color={colors.primaryBg} />
+          <FontAwesomeIcon name="chevron-left" color={colors.primaryBg} />
           <Avatar
             containerStyle={styles.avatar}
             source={{ uri: event?.image }}

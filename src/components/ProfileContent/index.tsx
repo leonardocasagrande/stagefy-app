@@ -1,4 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicon from 'react-native-vector-icons/Ionicons';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 import axios from 'axios';
 import React from 'react';
 import { View, Text } from 'react-native';
@@ -12,6 +15,7 @@ import BackHeader from '../BackHeader';
 import HomeButton from '../HomeButton';
 import IconButton from '../IconButton';
 import styles from './styles';
+import colors from '../../theme/colors';
 
 interface IProfileContentProps {
   onGoBack?(): void;
@@ -59,35 +63,40 @@ const ProfileContent = ({ onGoBack }: IProfileContentProps) => {
       <View style={styles.actions}>
         <HomeButton
           onPress={console.log}
-          icon={<FontAwesomeIcon icon="edit" />}
+          icon={<FontAwesomeIcon color={colors.textMain} name="edit" />}
           title="Editar Perfil"
         />
         <HomeButton
           onPress={console.log}
-          icon={<FontAwesomeIcon icon="users" />}
+          icon={<FeatherIcon color={colors.textMain} name="users" />}
           title="Meus Perfis"
         />
         <HomeButton
           onPress={console.log}
-          icon={<FontAwesomeIcon icon="wallet" />}
+          icon={<Ionicon color={colors.textMain} name="wallet-outline" />}
           title="Minha Carteira"
         />
         {!!user?.professional && (
           <HomeButton
             onPress={() => navigate('StreamerSchedule')}
-            icon={<FontAwesomeIcon icon="satellite-dish" />}
+            icon={
+              <MaterialCommunityIcon
+                color={colors.textMain}
+                name="satellite-uplink"
+              />
+            }
             title="Agenda de lives"
           />
         )}
       </View>
       <View style={styles.bottom}>
         <IconButton
-          icon="trash-alt"
+          icon={<FontAwesomeIcon color={colors.textMain} name="trash-o" />}
           title="Excluir perfil"
           onPress={console.log}
         />
         <IconButton
-          icon="sign-out-alt"
+          icon={<MaterialCommunityIcon color={colors.textMain} name="logout" />}
           title="Sair da minha conta"
           onPress={handleLogout}
         />

@@ -7,26 +7,7 @@ import { styles } from './styles';
 const tabs = ['Lives', 'Próximas'];
 
 const Home: React.FC = () => {
-  // const { signOut } = useAuth();
-  // const { setError } = useError();
-
-  // const { navigate, reset } = useRootStackNavigation();
-
   const [activeTab, setActiveTab] = useState('Lives');
-
-  // const handleLogout = async () => {
-  //   try {
-  //     await signOut();
-  //     reset({
-  //       index: 0,
-  //       routes: [{ name: 'Login' }],
-  //     });
-  //   } catch (err) {
-  //     if (axios.isAxiosError(err)) {
-  //       setError(err.response?.data.message);
-  //     }
-  //   }
-  // };
 
   return (
     <View style={styles.screen}>
